@@ -1,0 +1,24 @@
+---
+
+include:
+  - { project: gitlab/ci-templates, file: lint/python.yml }
+  - { project: gitlab/ci-templates, file: build/python.yml }
+  - { project: gitlab/ci-templates, file: release/semantic.yml }
+  - { project: gitlab/ci-templates, file: release/python.yml }
+  # - { project: gitlab/ci-templates, file: release/github.yml }
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_MESSAGE =~ /chore\(release\):/
+      when: never
+    - if: $CI_PIPELINE_SOURCE =~ /api|push|merge|web/
+
+variables:
+  TWINE_SKIP: pypi
+  GITHUB_UPSTREAM: derJD/python-mkblog
+
+stages:
+  - lint
+  - build
+  - release
