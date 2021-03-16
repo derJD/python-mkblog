@@ -1,0 +1,16 @@
+---
+
+site_name: test.page
+
+theme:
+  name: material
+  features:
+    - tabs
+  palette:
+    primary: blue
+    accent: red
+
+plugins:
+  - mkblog
+  - search
+  - awesome-pages
