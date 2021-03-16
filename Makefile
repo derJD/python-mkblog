@@ -11,7 +11,19 @@ install:
 list:
 	pip show ${PWD##*/}
 lint:
-	${PODMAN} pylint --exit-zero -f parseable src/
+	${PODMAN} bash -c 'pip install .; pylint --exit-zero -f parseable src/'
+container:
+	@echo "#########################################################"
+	@echo "# pip install .                                         #"
+	@echo "# mkdocs -v serve -f example/mkdocs.yml -a 0.0.0.0:8000 #"
+	@echo "#########################################################"
+
+	podman run -it --rm \
+		--pull always \
+		-p 8000:8000 \
+		-v ./:/builds/$${PWD##*/} \
+		-w /builds/$${PWD##*/} \
+		gitlab.der-jd.de:5050/containers/mkdocs:latest bash
 
 help:
 	@echo -e "Available targets:\n"
