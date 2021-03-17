@@ -1,6 +1,7 @@
 # python-mkblog
 
 [![PyPI version](https://badge.fury.io/py/python-mkblog.svg)](https://badge.fury.io/py/python-mkblog)
+[![PyPI downloads](https://img.shields.io/pypi/dm/mkblog)](https://pypi.org/project/mkblog/)
 [![pylint](https://gitlab.der-jd.de/python/mkblog/-/jobs/artifacts/main/raw/pylint.svg?job=lint:pylint)](#python-mkblog)
 
 ## Installation
