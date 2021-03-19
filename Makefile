@@ -1,7 +1,7 @@
 # containers/python-build is located on a private registry
 #  which is known to podman via ~/.config/containers/registries.conf
 # containers/python-build is a container with
-#   setuptools_scm, pylint, twine installed via pip3
+#   build, setuptools_scm, pylint, twine installed via pip3
 #
 PODMAN := podman run -it --rm \
 			--pull always \
