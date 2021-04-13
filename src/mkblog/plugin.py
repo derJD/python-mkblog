@@ -31,8 +31,8 @@ class MkBlog(BasePlugin):
     For determening a release date markdown metadata `date` is used.
 
     Example:
-        blog/first-post.md:
-        ```markdown
+    blog/first-post.md:
+    ```markdown
         ---
         author: JD
         date: 1990-01-01
@@ -48,9 +48,9 @@ class MkBlog(BasePlugin):
 
         Bye
 
-        ```
+    ```
 
-        This will be published under /blog/1990/01/01/first-post/
+    This will be published under /blog/1990/01/01/first-post/
     """
     config_scheme = (
         ('blog_dir', Type(str, default='blog')),
@@ -78,6 +78,7 @@ class MkBlog(BasePlugin):
 
         Parameters:
         file: absolute path to blogpost markdown file
+
         Returns:
         blogpost's release date as uri path
         """
@@ -120,6 +121,7 @@ class MkBlog(BasePlugin):
     def on_files(self, files: Files, config: Config):
         """
         From `https://www.mkdocs.org/user-guide/plugins/#on_files`:
+
         The files event is called after the files collection is populated from
         the docs_dir. Use this event to add, remove, or alter files in the
         collection. Note that Page objects have not yet been associated with
@@ -129,6 +131,7 @@ class MkBlog(BasePlugin):
         Parameters:
         files: global files collection
         config: global configuration object
+
         Returns:
         global files collection
         """
