@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.1.0](https://gitlab.der-jd.de/python/mkblog/compare/1.0.1...1.1.0) (2021-04-13)
+
+
+### Features
+
+* **plugin:** Add blog_dir to livereload ([3db4656](https://gitlab.der-jd.de/python/mkblog/commit/3db46562b280640895dcbb572ad135408153dc00))
+
+
+### Documentation
+
+* fix badge links ([0883bb1](https://gitlab.der-jd.de/python/mkblog/commit/0883bb13e8c6e65c567214c5307ad7671e60c883))
+* Format docstrings ([96af28b](https://gitlab.der-jd.de/python/mkblog/commit/96af28b981aef700925fe6297efaf59531b32433))
+
+
+### Build System
+
+* **Makefile:** Expose liveserver port ([9514b3d](https://gitlab.der-jd.de/python/mkblog/commit/9514b3d6d45be952e15db498454fb2aaf118613b))
+* **Makefile:** Seperate container bin from flags ([93a4155](https://gitlab.der-jd.de/python/mkblog/commit/93a41553aefe141cd79053dd3198795408acac15))
+
 ### [1.0.1](https://gitlab.der-jd.de/python/mkblog/compare/1.0.0...1.0.1) (2021-03-19)
 
 
