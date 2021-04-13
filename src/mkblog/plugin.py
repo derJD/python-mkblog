@@ -58,6 +58,7 @@ class MkBlog(BasePlugin):
 
     def __init__(self):
         self._blog_md_file = None
+        self._blog_path = None
 
     def get_blog_md(self):
         """
@@ -66,10 +67,12 @@ class MkBlog(BasePlugin):
         Returns:
         files collection from all blogposts as list
         """
-        basedir = Path(self.config['docs_dir']).parent
-        blogdir = Path(f'{str(basedir)}/{self.config["blog_dir"]}')
+        self._blog_path = (
+            f'{Path(self.config["docs_dir"]).parent}/'
+            f'{self.config["blog_dir"]}'
+        )
+        blog_md_files = list(Path(self._blog_path).rglob('*.md'))
 
-        blog_md_files = list(blogdir.rglob('*.md'))
         return blog_md_files
 
     def get_blog_post_date(self):
@@ -157,3 +160,25 @@ class MkBlog(BasePlugin):
             files.append(blogpost)
 
         return files
+
+    def on_serve(self, server, config, builder):
+        """
+        From `https://www.mkdocs.org/user-guide/plugins/#on_serve`:
+
+        The serve event is only called when the serve command is used during
+        development. It is passed the Server instance which can be modified
+        before it is activated.
+        For example, additional files or directories could be added to the list
+        of "watched" files for auto-reloading.
+
+        Parameters:
+        server: livereload.Server instance
+        config: global configuration object
+        builder: a callable which gets passed to each call to server.watch
+
+        Returns:
+        livereload.Server instance
+        """
+        # docs_dir and configuration will still be watched
+        # no need for adding them here (again)
+        server.watch(self._blog_path, builder)
