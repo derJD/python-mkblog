@@ -6,6 +6,7 @@
 CBIN := podman
 CFLAGS := run -it --rm \
 			--pull always \
+			-p 8000:8000 \
 			-v ./:/builds/${PWD##*/} \
 			-w /builds/${PWD##*/} \
 			containers/python-build:latest
