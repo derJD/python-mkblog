@@ -10,6 +10,7 @@ Yet an other blog plugin for MkDocs.
 
 from datetime import datetime
 from pathlib import Path
+from git import Git
 
 import logging
 import markdown
@@ -78,22 +79,30 @@ class MkBlog(BasePlugin):
     def get_blog_post_date(self):
         """
         Search markdown metadata for a releasedate from given file.
-
-        Parameters:
-        file: absolute path to blogpost markdown file
+        If no matching metadata is present, the oldest commit is used instead.
+        As a last resort the file's ctime is used as release date.
 
         Returns:
         blogpost's release date as uri path
         """
         m_d = markdown.Markdown(extensions=['meta'])
         m_d.convert(self._blog_md_file.read_text())
-        # Prevent pylint from false positive report:
-        #   Instance of 'Markdown' has no 'Meta' member
-        metadata = m_d.Meta  # pylint: disable=E1101
+        metadata = m_d.Meta  # pylint: disable=E1101 # false positive
 
-        # TODO: search for different date metadata(release-date, date, release)
-        #       if no metadata is found, use file's ctime or mtime instead.
-        release_date = datetime.strptime(metadata['date'][0], '%Y-%m-%d')
+        if 'date' in metadata:
+            rawdate = metadata['date'][0]
+        else:
+            rawdate = Git().log(
+                self._blog_md_file,
+                date='short',
+                format='%ad'
+            ).split('\n')[-1]
+
+        try:
+            release_date = datetime.strptime(rawdate, '%Y-%m-%d')
+        except ValueError:
+            release_date = datetime.fromtimestamp(
+                self._blog_md_file.stat().st_ctime)
 
         return str(release_date.strftime('%Y/%m/%d'))
 
