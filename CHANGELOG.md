@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://gitlab.der-jd.de/python/mkblog/compare/1.1.0...1.2.0) (2021-04-14)
+
+
+### Features
+
+* **plugin:** Add fallback determening release date ([a76c126](https://gitlab.der-jd.de/python/mkblog/commit/a76c126f9843059ede3f8908c78d826699ed32cf))
+
 ## [1.1.0](https://gitlab.der-jd.de/python/mkblog/compare/1.0.1...1.1.0) (2021-04-13)
 
 
